@@ -19,6 +19,7 @@ headers = {'accept': "application/json", 'cache-control': "no-cache"}
 username = os.environ.get('username')
 password = os.environ.get('password')
 domain = os.environ.get('domain')
+sender = os.environ.get('sender')
 
 
 #####
@@ -27,7 +28,7 @@ domain = os.environ.get('domain')
 
 @app.route('/alert', methods=['POST'])
 def send_sms(message):
-    payload_json = {'senders':['300075314'], 'messages':[message], 'recipients':['09366266161'] }
+    payload_json = {'senders':[sender], 'messages':[message], 'recipients':['09366266161'] }
     response = requests.post(url, headers=headers, auth=(username + '/' + domain, password), json=payload_json)
     print(response.json())
 
